@@ -8,8 +8,6 @@ contract PoC_InputAmountFee is Test {
     TSwapPool pool;
 
     function setUp() public {
-        // Pure pricing functions don't touch these addresses, so placeholders are fine.
-        // Adjust the constructor arguments if your TSwapPool signature differs.
         pool = new TSwapPool(address(0x1), address(0x2), "LP Token", "LP");
     }
 
@@ -18,7 +16,6 @@ contract PoC_InputAmountFee is Test {
         uint256 outputReserves = 100e18;
         uint256 outputAmount = 1e18;
 
-        // What the pool currently returns
         uint256 actualInput = pool.getInputAmountBasedOnOutput(
             outputAmount,
             inputReserves,
@@ -51,7 +48,6 @@ contract PoC_InputAmountFee is Test {
         );
 
         // Feed the quoted input back into the forward pricing function.
-        // A correct quote should return roughly outputAmount.
         uint256 receivedOutput = pool.getOutputAmountBasedOnInput(
             actualInput,
             inputReserves,
